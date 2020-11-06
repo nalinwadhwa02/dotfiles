@@ -18,29 +18,21 @@ set nocompatible
 set relativenumber
 filetype plugin on
 
-" enable code foldings
-"set foldmethod=indent
-"set foldlevel=99
-
-
-
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/Zenburn'
-Plug 'dylanaraps/fff.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'raimondi/delimitmate'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'lilydjwg/colorizer'
 Plug 'plasticboy/vim-markdown'
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
 Plug 'ervandew/supertab'
-Plug 'valloric/youcompleteme'
-Plug 'jupyter-vim/jupyter-vim'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 call plug#end()
-
 
 
 
@@ -48,14 +40,14 @@ call plug#end()
 set path+=**
 set wildmenu
 
-" hi Normal guibg=NONE ctermbg=NONE
-" colorscheme zenburn
+
+colorscheme zenburn
 set background=dark
 
 
 let mapleader = " "
 
-nnoremap <silent> <Leader>f :F<CR>
+nnoremap <silent> <Leader>f :NERDTree<CR>
 nnoremap <silent> <Leader>u :UndotreeShow<CR>
 nnoremap <silent> <Leader>h :wincmd h<CR>
 nnoremap <silent> <Leader>l :wincmd l<CR>
@@ -71,14 +63,8 @@ let g:instant_markdown_autostart = 0
 "let g:instant_markdown_open_to_the_world = 1
 "let g:instant_markdown_allow_unsafe_content = 1
 "let g:instant_markdown_allow_external_content = 0
-let g:instant_markdown_browser="qutebrowser"
 let g:instant_markdown_mathjax = 1
 "let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 "let g:instant_markdown_autoscroll = 0
 "let g:instant_markdown_port = 8888
 "let g:instant_markdown_python = 1
-
-nnoremap <silent> <Leader>x :JupyterSendCell<CR>
-
-let g:jedi#completions_enabled = 0
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
