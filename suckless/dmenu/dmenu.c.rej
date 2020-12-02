@@ -1,0 +1,13 @@
+--- dmenu.c
++++ dmenu.c
+@@ -705,9 +693,7 @@ main(int argc, char *argv[])
+ 		else if (!strcmp(argv[i], "-i")) { /* case-insensitive item matching */
+ 			fstrncmp = strncasecmp;
+ 			fstrstr = cistrstr;
+-		} else if (!strcmp(argv[i], "-x"))   /* invert use_prefix */
+-			use_prefix = !use_prefix;
+-		else if (i + 1 == argc)
++		} else if (i + 1 == argc)
+ 			usage();
+ 		/* these options take one argument */
+ 		else if (!strcmp(argv[i], "-l"))   /* number of lines in vertical list */
