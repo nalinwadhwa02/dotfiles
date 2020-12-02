@@ -1,4 +1,4 @@
--- If LuaRocks is installed, make sure that packages installed through it are
+
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
@@ -228,10 +228,12 @@ globalkeys = gears.table.join(
               {description = "go back", group = "tag"}),
     awful.key({ modkey,           }, "F8",    function () awful.util.spawn("pactl set-sink-volume 0 +5%") end),
     awful.key({ modkey,           }, "F7",    function () awful.util.spawn("pactl set-sink-volume 0 -5%") end),
+    awful.key({ modkey,           }, "F3",    function () awful.util.spawn("light -A 10") end),
     awful.key({ modkey,           }, "F6",    function () awful.util.spawn("pactl set-sink-mute 0 toggle") end),
+    awful.key({ modkey,           }, "F2",    function () awful.util.spawn("light -U 10") end),
     awful.key({ modkey, "Shift"   }, "b",     function () awful.util.spawn("firefox")end), 
-    awful.key({ modkey, "Shift"   }, "x",     function () awful.util.spawn("slock")end),
-    awful.key({ modkey, "Shift"   }, "f",     function () awful.util.spawn("alacritty --title FileBrowser --command ranger")end),
+    awful.key({ modkey, "Shift"   }, "x",     function () awful.util.spawn("i3lock -c 333333")end),
+    awful.key({ modkey, "Shift"   }, "f",     function () awful.util.spawn("alacritty --title FileBrowser --command nnn")end),
     awful.key({ modkey,           }, "Print", function () awful.util.spawn("scrot '%Y-%m-%d-%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/ScreenShots/'")end),
 
     awful.key({ modkey, "Shift"   }, "m",     function () awful.util.spawn("alacritty --title music --command mocp")end),
@@ -568,10 +570,11 @@ do
 --		"alacritty --title ranger --command ranger",
 --		"alacritty --title music --command mocp",
 		"nm-applet",
-		"xfce4-power-manager",
+		"lxqt-powermanagement",
         "xbanish",
         "pasystray",
         "redshift",
+        "xcompmgr",
         "setxkbmap -option caps:escape"
 	}
 	for _,i in pairs(cmds) do

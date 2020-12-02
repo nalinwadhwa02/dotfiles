@@ -99,13 +99,15 @@ font:
     #   - (Windows) Consolas
     #family: CaskaydiaCove Nerd Font
     #family: Anonymice NF
+    family: FiraCode
     #family: MesloLGM Nerd Font
+    #family: Fira Sans Light
     #family: Monofur Nerd Font
     # family: Hurmit Nerd Font
-    family: CodeNewRoman Nerd Font
+    #family: CodeNewRoman Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Regular
 
   # Bold font face
   #bold:
@@ -179,9 +181,12 @@ font:
 colors:
   # Default colors
   primary:
+      #blueTheme
+      #foreground: '#bbeeff'
+      #background: '#000000'
       #monochrome theme
-      #background: '#333333'
-      #foreground: '#DDDDDD'
+      background: '#333333'
+      foreground: '#DDDDDD'
       #dark theme
       #background: '#21242B'
       #foreground: '#596066'
@@ -189,8 +194,8 @@ colors:
       #background: '#504935'
       #foreground: '#F6E596'
       #purpletheme
-      foreground: '#E0B3CB'
-      background: '#1E141D'
+      #foreground: '#E0B3CB'
+      #background: '#1E141D'
 
 
     # Bright and dim foreground colors
@@ -293,7 +298,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.90
+background_opacity: 0.75
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
