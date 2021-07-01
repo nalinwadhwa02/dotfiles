@@ -1,0 +1,27 @@
+import System.IO
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.SpawnOnce
+
+main = do
+	xmproc <- spawnPipe "xmobar ~/.xmonad/xmobarrc"
+	xmonad $ docks def
+		{ layoutHook = avoidStruts $ layoutHook defaultConfig
+		, terminal = "alacritty"
+		, logHook = dynamicLogWithPP xmobarPP
+			{ ppOutput hPutStrLn xmproc
+			}
+		, modMask = mod4Mask
+		, startupHook = do 
+			spawnOnce "feh --bg-center ~/Pictures/Backgrounds/alain-bonnardeaux-Bsf_yk3HcsE-unsplash.jpg &"
+			spawnOnce "picom &"
+			spawnOnce "setxkbmap -option caps:escape &"
+			spawnOnce "stalonetray &"
+			spawnOnce "nm-applet &"
+		} `additionalKeys`
+		[ ((mod4Mask .|. shiftMask, xK_b), spawn "brave")
+		, ((mod4Mask .|. shiftMask, xK_f), spawn "alacritty -e tOpen")
+		]

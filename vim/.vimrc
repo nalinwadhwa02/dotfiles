@@ -1,69 +1,67 @@
+set nocompatible
 syntax enable
-
-set noerrorbells
-set clipboard=unnamedplus
-set spelllang=en
-set spellfile=/home/nalinwadhwa/Dropbox/vim/spell/en.utf-8.add
-set tabstop=4 softtabstop=4
+filetype plugin on
+set encoding=utf-8
+set tabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
+set noerrorbells
 set smartindent
-set nu
+set number 
+set relativenumber
 set nowrap
-"set splitbelow
-"set splitright
 set smartcase
 set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
-set showcmd
-set nocompatible
-set relativenumber
-filetype plugin on
-
-call plug#begin('~/.vim/plugged')
-Plug 'raimondi/delimitmate'
-Plug 'morhetz/gruvbox'
-Plug 'mbbill/undotree'
-Plug 'rhysd/vim-grammarous'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-fugitive'
-Plug 'lilydjwg/colorizer'
-Plug 'ervandew/supertab'
-Plug 'fxn/vim-monochrome'
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'raimondi/delimitmate'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-call plug#end()
-
-
-
-"file finder
+set splitbelow 
 set path+=**
 set wildmenu
+set mousefocus
 
-"colorscheme
-set bg=dark
-"let g:airline_theme='gruvbox'
-"autocmd vimenter * ++nested colorscheme gruvbox
+call plug#begin('~/.vim/plugged')
+Plug 'morhetz/gruvbox'
+Plug 'ap/vim-css-color'
+Plug 'owozsh/amora'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tribela/vim-transparent'
+Plug 'powerline/powerline'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'jpalardy/vim-slime'
+call plug#end()
 
-let mapleader = " "
+colorscheme gruvbox
+"colorscheme amora
+set background=dark
+let g:airline_theme='gruvbox'
+let g:airline#extensions#tabline#enabled = 1
 
-nnoremap <silent> <Leader>v :vs<CR>
-nnoremap <silent> <Leader>V :split<CR>
-nnoremap <silent> <Leader>f :Ex<CR>
-nnoremap <silent> <Leader>u :UndotreeShow<CR>
-nnoremap <silent> <Leader>t :tabedit<CR>
-nnoremap <silent> <Leader>l :tabn<CR>
-nnoremap <silent> <Leader>h :tabp<CR>
-nnoremap <silent> <Leader>j <C-W>w<CR>
-nnoremap <silent> <Leader>k <C-W>W<CR>
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
+let g:netrw_banner=0
+let g:netrw_browse_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_winsize=25
+let mapleader=" "
+
+let g:slime_target = "vimterminal"
 
 
-"netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-
+nmap <silent><leader>h :wincmd h<CR>
+nmap <silent><leader>j :wincmd j<CR>
+nmap <silent><leader>k :wincmd k<CR>
+nmap <silent><leader>l :wincmd l<CR>
+nmap <silent><leader>f :vsplit <bar>:Ex<bar>:vertical resize 30<CR>
+nmap <silent><leader>v :vsplit<CR>
+nmap <silent><leader>s :split<CR>
+nmap <silent><leader>t :tabedit<CR>
+nmap <silent><leader>r :wincmd H<CR>
