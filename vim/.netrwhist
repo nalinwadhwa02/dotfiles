@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/nwlynx/Programs/.dotfiles/suckless/dmenu'
+let g:netrw_dirhist_1='/home/nwlynx'
+let g:netrw_dirhist_0='/home/nwlynx/.config'
+let g:netrw_dirhist_9='/home/nwlynx/.config/awesome'
+let g:netrw_dirhist_8='/home/nwlynx'
+let g:netrw_dirhist_7='/etc/X11'
+let g:netrw_dirhist_6='/home/nwlynx/code/os/first'
+let g:netrw_dirhist_5='/home/nwlynx/code/os/first/src'
+let g:netrw_dirhist_4='/home/nwlynx/code/os/first'
+let g:netrw_dirhist_3='/home/nwlynx/code/os/first/src'

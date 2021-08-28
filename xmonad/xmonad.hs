@@ -154,6 +154,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((0                     , 0x1008FF11), spawn "amixer -q sset Master 2%-")
 	, ((0                     , 0x1008FF13), spawn "amixer -q sset Master 2%+")
 	, ((0                     , 0x1008FF12), spawn "amixer set Master toggle")
+	, ((0                     , xK_Print), spawn "scrot -q 100 '%Y-%m-%d-%H-%M-%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/'")
 
     ]
     ++
@@ -238,6 +239,7 @@ myLayout = avoidStruts(tiled ||| Mirror tiled ||| Full)
 myManageHook = manageDocks <+> composeAll
     [ className =? "MPlayer" --> doFloat
     , className =? "Gimp" --> doFloat
+	, className =? "Vocal" --> doShift "9"
 	, stringProperty "WM_WINDOW_ROLE" =? "browser" --> doShift "2"
 	, className =? "Geary" --> doShift "8"
     , resource  =? "desktop_window" --> doIgnore

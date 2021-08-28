@@ -1,0 +1,85 @@
+#!/bin/bash
+# mirrorlist generator
+# poorly coded by mrgreen [mrgreen@archbang.org]
+
+mirror="/etc/pacman.d/mirrorlist"
+prompt1="Enter your option: "
+
+
+# This is the stuff we need.....
+getmirror() { #{{{
+declare -a location
+input="${mirror}"
+while IFS= read -r line
+do
+  # do stuff
+  [[ $line =~ ^##.* ]] && location+=("${line//##}")
+
+done < "$input"
+
+PS3="(shift+pgup/pgdown) $prompt1"
+echo "Select location:"
+select LOCATION in "${location[@]}"; do
+   if contains_element "$LOCATION" "${location[@]}"; then
+        break
+      else
+        invalid_option
+      fi
+   done
+}
+
+
+# until here
+
+
+# This is added to make script work
+read_input_text() { #{{{
+    if [[ $AUTOMATIC_MODE -eq 1 ]]; then
+      OPTION=$2
+    else
+      read -p "$1 [y/N]: " OPTION
+      echo ""
+    fi
+    OPTION=$(echo "$OPTION" | tr '[:upper:]' '[:lower:]')
+  } #}}}
+
+
+contains_element() {
+for e in "${@:2}"; do [[ $e == $1 ]] && break; done;
+}
+
+
+invalid_option() { #{{{
+    print_line
+    echo "Invalid option. Try another one."
+    pause_function
+}
+
+
+# this is required
+# As part of mirror stuff
+# 
+# this should be in fucntion getmirror
+
+# am in the mind toback up mirrorlist then use this function to replace it 
+
+get_country() {
+# backup list
+cp ${mirror} /etc/pacman.d/mirrorlist.backup
+# remove top lines
+sed -i '1,+4d' ${mirror}
+OPTION=n
+while [[ $OPTION != y ]]; do
+  getmirror
+  echo ""
+  read_input_text "Confirm Location: $LOCATION"
+done
+
+# magic happens here then pipe to /etc/pacman.d/mirrorlist
+sed -n -r "/${LOCATION}/,/^\s*$/p" ${mirror} | sed "s/#Server/Server/g" > server_list
+mv server_list ${mirror}
+}
+
+get_country
+
+

@@ -7,10 +7,24 @@ Config { font = "xft:Hasklug NF:size=9:bold:antialias=true"
 					, Run Volume "default" "Master" [] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
+					, Run Battery [ "--template" , "Batt: <acstatus>"
+                                , "--L" , "15"
+                                , "--H" , "75"
+                                , "--low"      , "darkred"
+                                , "--normal"   , "darkorange"
+                                , "--high"     , "#1ABC9C"
+                                , "--" -- battery specific options
+                                       -- discharging status
+                                       , "-o"	, "<left>% (<timeleft>)"
+                                       -- AC "on" status
+                                       , "-O"	, "<fc=#dAA520>Charging</fc>"
+                                       -- charged status
+                                       , "-i"	, "<fc=#1ABC9C>Charged</fc>"
+                                ] 50
                     , Run Date "%a %b %_d %l:%M" "date" 10
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% } <fc=#ee9a00>%date%</fc> { %cpu% | %memory% * %swap% | %default:Master%          "
+       , template = "%StdinReader% } <fc=#ee9a00>%date%</fc> { %cpu% | %memory% * %swap% | %default:Master% | %battery%         "
        }

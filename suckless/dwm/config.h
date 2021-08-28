@@ -10,8 +10,8 @@ static const unsigned int gappov    = 4;       /* vert outer gap between windows
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "FiraCode Nerd Font:pixelsize=15:style=Retina:antialias=true:autohint=true"};
-static const char dmenufont[]       = "FiraCode Nerd Font:pixelsize=15:style=Retina:antialias=true:autohint=true";
+static const char *fonts[]          = { "Hasklug NF:pixelsize=15:style=Retina:antialias=true:autohint=true"};
+static const char dmenufont[]       = "Hasklug NF:pixelsize=15:style=Retina:antialias=true:autohint=true";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -90,7 +90,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run","-b", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -123,7 +123,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_s,      show,           {0} },
 	{ MODKEY|ShiftMask,             XK_h,      hide,           {0} },
-    { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("st -e nnn")},
+    { MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("alacritty -e tOpen")},
     { MODKEY|ShiftMask,             XK_b,      spawn,          SHCMD("firefox")},
     { MODKEY|ShiftMask,             XK_x,      spawn,          SHCMD("slock")},
     { MODKEY,             XK_Print,      spawn,          SHCMD("scrot '%Y-%m-%d-%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/ScreenShots/'")},
