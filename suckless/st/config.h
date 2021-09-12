@@ -5,8 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraCode Nerd Font:pixelsize=16:style=Retina:antialias=true:autohint=true";
-static int borderpx = 2;
+//static char *font = "IBM Plex Mono:pixelsize=16:antialias=true:autohint=true";
+//static char *font = "UbuntuMono NF:pixelsize=20:antialias=true:autohint=true";
+static char *font = "Iosevka Medium Extended:pixelsize=18:antialias=true:autohint=true";
+static int borderpx = 12;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -92,23 +94,29 @@ char *termname = "st-256color";
  *	stty tabs
  */
 unsigned int tabspaces = 8;
-
-/* bg opacity */
-float alpha = 1;
-
+float alpha = 0.90;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"#d54e53",
-	"#b9ca4a",
-	"yellow3",
-	"#7aa6da",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#3f3f3f",
+	"#cc0000",
+	"#439a06",
+	"#c4a000",
+	"#94bff3",
+	"#85678f",
+	"#06989a",
+	"#dcdccc",
 
 	/* 8 bright colors */
+    "#545454",
+    "#fc5454",
+    "#8ae234",
+    "#fce94f",
+    "#94bff3",
+    "#b294bb",
+    "#93e0e3",
+    "#ffffff",
+
 	"gray50",
 	"red",
 	"green",
@@ -121,9 +129,9 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#DDDDDD",
-	"#333333",
-	"black",
+	"#cccccc",
+	"#555555",
+	"#111111",
 };
 
 
@@ -131,8 +139,8 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 256;
-unsigned int defaultbg = 257;
+unsigned int defaultfg = 7;
+unsigned int defaultbg = 258;
 static unsigned int defaultcs = 256;
 static unsigned int defaultrcs = 257;
 
@@ -178,8 +186,6 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
-	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
-	{ ShiftMask,            Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -205,8 +211,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
-	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
