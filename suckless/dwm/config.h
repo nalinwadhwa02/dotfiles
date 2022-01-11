@@ -11,8 +11,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
-static const char *fonts[]          = { "UbuntuMono NF:size=14" }; 
-static const char dmenufont[]       = "UbuntuMono NF:size=14";
+static const char *fonts[]          = { "Terminess Nerd Font Mono:size=14" }; 
+static const char dmenufont[]       = "Terminess Nerd Font Mono:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#aa6666";
 static const char col_gray3[]       = "#444444";
@@ -34,8 +34,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "ter", "www", "dir", "prc", "fiv", "six", "sev", "eml", "mus" };
-//static const char *tags[] = { "", "", "", "", "ﱤ", "ﱤ", "ﱤ", "", "" };
+//static const char *tags[] = { "ter", "www", "dir", "prc", "fiv", "six", "sev", "eml", "mus" };
+static const char *tags[] = { "", "", "", "", "ﱤ", "ﱤ", "ﱤ", "", "" };
 
 
 static const Rule rules[] = {
@@ -77,10 +77,10 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray1, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 
 //custom commands
-static char *fileman[] = { "st", "-e", "nnn", NULL};
+static char *fileman[] = { "kitty", "-e", "nnn", NULL};
 static char *browser[] = { "firefox", NULL };
 static char *lockscr[] = { "slock", NULL };
 
@@ -94,10 +94,14 @@ static char *decback[] = { "xbacklight", "-dec", "10", NULL };
 static const char *const autostart[] = {
 	"slstatus", NULL,
 	"unclutter", NULL,
-	"setxkbmap","-option","caps:escape", NULL,
-	"nitrogen","--restore", NULL,
-	"nm-applet",NULL,
-	"volumeicon",NULL,
+	"setxkbmap", "-option", "caps:escape", NULL,
+	"nitrogen", "--restore", NULL,
+	"nm-applet", NULL,
+	"xfce4-power-manager", NULL,
+	"dunst", NULL,
+	"udiskie", "-t", NULL,
+	"picom", "--no-fading-openclose", "--fade-in-step=1", "--fade-out-step=1", "--fade-delta=0", NULL,
+	"feh", "--bg-fill", "/home/nw/Pictures/Backgrounds/ismail-inceoglu-signal-not-found.jpg", NULL,
 	NULL
 };
 
