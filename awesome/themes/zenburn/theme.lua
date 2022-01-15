@@ -8,32 +8,28 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = "/home/nalinwadhwa/Pictures/wallpapers/1.png"
+theme.wallpaper = themes_path .. "zenburn/zenburn-background.png"
 -- }}}
 
 -- {{{ Styles
---theme.font      = "TerminessTTF Nerd Font Mono 14"
---theme.font      = "MesloLGS Nerd Font 10"
-theme.font      = "CodeNewRoman Nerd Font 12"
---theme.font      = "TerminessTTF Nerd Font Mono 14"
+theme.font      = "sans 8"
+
 -- {{{ Colors
-
-theme.fg_normal  = "#FF9E47"
-theme.fg_focus   = "#FF9E47"
+theme.fg_normal  = "#DCDCCC"
+theme.fg_focus   = "#F0DFAF"
 theme.fg_urgent  = "#CC9393"
-theme.bg_normal  = "#53334677"
-theme.bg_focus   = "#38234277"
-
-theme.bg_urgent  = "#3F3F3F77"
+theme.bg_normal  = "#3F3F3F"
+theme.bg_focus   = "#1E2320"
+theme.bg_urgent  = "#3F3F3F"
 theme.bg_systray = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.useless_gap   = dpi(5)
-theme.border_width  = dpi(1)
-theme.border_normal = "#AD6789ff"
-theme.border_focus  = "#FE6C91FF"
-theme.border_marked = "#CC9393ff"
+theme.useless_gap   = dpi(0)
+theme.border_width  = dpi(2)
+theme.border_normal = "#3F3F3F"
+theme.border_focus  = "#6F6F6F"
+theme.border_marked = "#CC9393"
 -- }}}
 
 -- {{{ Titlebars
@@ -83,7 +79,7 @@ theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
 -- }}}
 
 -- {{{ Misc
----theme.awesome_icon           = themes_path .. "zenburn/awesome-icon.png"
+theme.awesome_icon           = themes_path .. "zenburn/awesome-icon.png"
 theme.menu_submenu_icon      = themes_path .. "default/submenu.png"
 -- }}}
 

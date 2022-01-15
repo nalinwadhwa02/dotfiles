@@ -1,4 +1,4 @@
-
+-- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
@@ -45,14 +45,21 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/nalinwadhwa/.config/awesome/purplemonochrometheme.lua")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+theme_name = "zenburn"
+local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), theme_name)
+beautiful.init(theme_path)
+-- beautiful.useless_gap = 5
 
 -- This is used later as the default terminal and editor to run.
-
-terminal = "alacritty"
+terminal = "xfce4-terminal"
+browser = "firefox"
+filebrowser = "nnn"
+filebrowser_cmd = terminal .. " -e " .. filebrowser
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
+xrandr = require("xrandr")
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -63,9 +70,20 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.top,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
+    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier,
     awful.layout.suit.floating,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.sw,
+    -- awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -78,10 +96,9 @@ myawesomemenu = {
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
 }
-browser = "qutebrowser"
+
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "terminal", terminal },
-				    { "browser",browser }
+                                    { "open terminal", terminal }
                                   }
                         })
 
@@ -139,7 +156,6 @@ local tasklist_buttons = gears.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-beautiful.wallpaper = "/home/nalinwadhwa/Pictures/wallpapers/1.jpg"
 local function set_wallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -160,7 +176,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "  ", " 爵 ", "  ", "  ", "  ", " 6 ", " 7 "," 﫯 ", "  " }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -201,8 +217,9 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            mykeyboardlayout,
+            wibox.widget.systray(),
             mytextclock,
-	    wibox.widget.systray(),
             s.mylayoutbox,
         },
     }
@@ -211,6 +228,7 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
+    awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -218,7 +236,9 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey,           }, "?",      hotkeys_popup.show_help,
+              {description="show help", group="awesome"}),
+    awful.key({ modkey,           }, "s",      function() xrandr.xrandr() end,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
@@ -226,17 +246,7 @@ globalkeys = gears.table.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-    awful.key({ modkey,           }, "F8",    function () awful.util.spawn("pactl set-sink-volume 0 +5%") end),
-    awful.key({ modkey,           }, "F7",    function () awful.util.spawn("pactl set-sink-volume 0 -5%") end),
-    awful.key({ modkey,           }, "F3",    function () awful.util.spawn("light -A 10") end),
-    awful.key({ modkey,           }, "F6",    function () awful.util.spawn("pactl set-sink-mute 0 toggle") end),
-    awful.key({ modkey,           }, "F2",    function () awful.util.spawn("light -U 10") end),
-    awful.key({ modkey, "Shift"   }, "b",     function () awful.util.spawn("firefox")end), 
-    awful.key({ modkey, "Shift"   }, "x",     function () awful.util.spawn("i3lock -c 333333")end),
-    awful.key({ modkey, "Shift"   }, "f",     function () awful.util.spawn("alacritty --title FileBrowser --command nnn")end),
-    awful.key({ modkey,           }, "Print", function () awful.util.spawn("scrot '%Y-%m-%d-%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/ScreenShots/'")end),
 
-    awful.key({ modkey, "Shift"   }, "m",     function () awful.util.spawn("alacritty --title music --command mocp")end),
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -275,6 +285,10 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "e", function () awful.spawn(filebrowser_cmd) end,
+              {description = "open filebrowser", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "b", function () awful.spawn(browser) end,
+              {description = "open webbrowser", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -459,7 +473,6 @@ awful.rules.rules = {
     -- Floating clients.
     { rule_any = {
         instance = {
-          "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
         },
@@ -489,7 +502,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false }
+      }, properties = { titlebars_enabled = true }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -561,23 +574,10 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+gears.timer {
+       timeout = 30,
+       autostart = true,
+       callback = function() collectgarbage() end
+}
 
-
-do
-	local cmds =
-	{
---		"alacritty --title htop --command htop",
---		"alacritty --title ranger --command ranger",
---		"alacritty --title music --command mocp",
-		"nm-applet",
-		"lxqt-powermanagement",
-        "xbanish",
-        "pasystray",
-        "redshift",
-        "xcompmgr",
-        "setxkbmap -option caps:escape"
-	}
-	for _,i in pairs(cmds) do
-		awful.util.spawn(i)
-	end
-end
+awful.spawn.with_shell("bash /home/user/.config/autostart.sh")
