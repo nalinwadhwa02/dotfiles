@@ -1,3 +1,0 @@
-slstatus &
-unclutter
-
